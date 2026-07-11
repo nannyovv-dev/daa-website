@@ -175,17 +175,15 @@
         .p-leg { position: absolute; width: 30px; height: 35px; background: #333; border-radius: 10px 10px 20px 20px; top: 150px; z-index: 1; }
         .p-leg.left { left: 35px; } .p-leg.right { right: 35px; }
 
-        /* [แก้ไข] ปรับแต่งส่วนแขนท้าวเอวให้สมบูรณ์และแสดงผลถูกต้อง */
+        /* มือ */
         .p-arm { position: absolute; width: 30px; height: 45px; background: #333; border: 5px solid #333; top: 100px; z-index: 1; }
         .p-arm.left { left: 8px; border-radius: 20px 0 0 20px; transform: rotate(-35deg); }
         .p-arm.right { right: 8px; border-radius: 0 20px 20px 0; transform: rotate(35deg); }
         
-        /* มือจับเอว */
         .p-hand { position: absolute; width: 18px; height: 18px; background: #333; border-radius: 50%; top: 122px; z-index: 4; }
         .p-hand.left { left: 23px; }
         .p-hand.right { right: 23px; }
 
-        /* กล่องข้อความสุดท้าย */
         .chibi-msg {
             font-size: 26px; margin-top: 40px; font-weight: bold;
             background: rgba(255, 255, 255, 0.95); padding: 12px 28px;
@@ -195,7 +193,6 @@
             display: inline-block;
         }
 
-        /* Animations for Panda */
         .anim-spin { animation: spinChar 1s cubic-bezier(0.4, 0, 0.2, 1); }
         .anim-dance { animation: danceChar 0.5s infinite alternate ease-in-out; }
         
@@ -205,18 +202,112 @@
             100% { transform: rotate(10deg) translateY(5px); } 
         }
 
-        /* Sparkle Element */
         .sparkle { 
-            position: absolute; 
-            width: 15px; 
-            height: 15px; 
-            pointer-events: none; 
-            animation: flyOut 0.6s ease-out forwards; 
-            z-index: 9999; 
-            background-color: #ffffff;
+            position: absolute; width: 15px; height: 15px; pointer-events: none; 
+            animation: flyOut 0.6s ease-out forwards; z-index: 9999; background-color: #ffffff;
             clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
         }
         @keyframes flyOut { 0% { transform: translate(0, 0) scale(1) rotate(0deg); opacity: 1; } 100% { transform: translate(var(--mx), var(--my)) scale(0) rotate(180deg); opacity: 0; } }
+
+        /* =========================================
+           ระบบปุ่มบังคับเลือก 
+           ========================================= */
+        .choice-container {
+            display: none; flex-direction: column; align-items: center; justify-content: center; width: 100%; height: 100vh; position: relative;
+        }
+        .choice-title { font-size: 32px; color: #fff; font-weight: bold; margin-bottom: 30px; text-shadow: 2px 2px 4px rgba(0,0,0,0.6); text-align: center; z-index: 10; }
+        
+        .force-btn {
+            padding: 15px 45px; font-size: 26px; font-weight: bold; border-radius: 50px;
+            border: 4px solid #333; cursor: pointer; background: white; color: #333;
+            box-shadow: 0 8px 0 #333, 0 15px 20px rgba(0,0,0,0.3); transition: all 0.2s;
+            margin: 15px; z-index: 10; min-width: 180px; text-align: center;
+        }
+        .force-btn:active { transform: translateY(8px); box-shadow: 0 0 0 #333; }
+        #btn-noda { position: relative; transition: left 0.2s ease, top 0.2s ease; }
+
+        /* =========================================
+           หน้าแผ่นเสียง สีชมพูนมสุดน่ารัก 🎀
+           ========================================= */
+        #page-music-player {
+            background: radial-gradient(circle, #fff0f5, #ffb6c1); /* ชมพูนมๆอ่อนๆ */
+            width: 100%; height: 100vh; overflow: hidden; position: relative;
+        }
+        
+        /* แผ่นเสียงสีชมพู */
+        .vinyl-wrapper { position: relative; width: 280px; height: 280px; margin-bottom: 40px; z-index: 5; }
+        .vinyl-record {
+            width: 100%; height: 100%; 
+            background: repeating-radial-gradient(
+                #ffb6c1, 
+                #ffb6c1 8px, 
+                #ff99cc 10px, 
+                #ff99cc 18px
+            ); /* แผ่นเสียงลายร่องสีชมพู */
+            border-radius: 50%; border: 6px solid #fff; 
+            box-shadow: 0 10px 30px rgba(255, 105, 180, 0.4);
+            display: flex; justify-content: center; align-items: center;
+            animation: spinRecord 4s linear infinite;
+        }
+        
+        /* แกนกลางใส่รูป */
+        .vinyl-center { 
+            width: 120px; height: 120px; background: #fff; border-radius: 50%; 
+            border: 5px solid #fff; display: flex; justify-content: center; align-items: center; 
+            overflow: hidden; position: relative;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+        }
+        .vinyl-center img { width: 100%; height: 100%; object-fit: cover; }
+        
+        /* รูตรงกลางแผ่นเสียง */
+        .vinyl-hole {
+            position: absolute; width: 14px; height: 14px; background: #fff0f5; 
+            border-radius: 50%; border: 2px solid rgba(0,0,0,0.1);
+        }
+        
+        @keyframes spinRecord { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+        /* ข้อความที่ลอยบนหน้าจอ */
+        .floating-text {
+            position: absolute; font-weight: bold; pointer-events: none;
+            /* ทำให้ขอบตัวหนังสือสีขาวชัดเจน ตัดกับพื้นชมพู */
+            text-shadow: 2px 2px 0px #fff, -2px -2px 0px #fff, 2px -2px 0px #fff, -2px 2px 0px #fff, 0 5px 15px rgba(255,105,180,0.4);
+            animation: fallAndFade linear forwards; z-index: 2; white-space: nowrap;
+        }
+        
+        /* หัวใจเล็กๆ ลอยขึ้น */
+        .floating-heart {
+            position: absolute; pointer-events: none; z-index: 3; font-size: 20px;
+            animation: floatUp 5s linear forwards;
+            filter: drop-shadow(0 0 5px rgba(255,255,255,0.8));
+        }
+
+        /* ตัวการ์ตูนตกแต่งด้านข้าง */
+        .cute-char {
+            position: absolute; font-size: 55px; z-index: 4;
+            animation: bobbing 2s infinite alternate ease-in-out;
+            filter: drop-shadow(0 5px 5px rgba(255,105,180,0.3));
+        }
+        .char-left { left: 10vw; bottom: 20vh; animation-delay: 0s; }
+        .char-right { right: 10vw; bottom: 25vh; animation-delay: 1s; }
+
+        @keyframes fallAndFade {
+            0% { transform: translateY(-10vh) translateX(0) scale(0.5); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(110vh) translateX(var(--moveX)) scale(1.2); opacity: 0; }
+        }
+        
+        @keyframes floatUp {
+            0% { transform: translateY(100vh) scale(0.5) rotate(-20deg); opacity: 0; }
+            20% { opacity: 1; }
+            100% { transform: translateY(-10vh) scale(1.5) rotate(20deg); opacity: 0; }
+        }
+
+        @keyframes bobbing {
+            0% { transform: translateY(0) rotate(-10deg); }
+            100% { transform: translateY(-25px) rotate(10deg); }
+        }
     </style>
 </head>
 <body>
@@ -278,7 +369,7 @@
     </div>
 
     <div id="page-dance" class="page-section">
-        <div class="chibi-container">
+        <div class="chibi-container" id="panda-dance-box">
             <div class="chibi-panda" id="myPanda">
                 <div class="p-ear left"></div>
                 <div class="p-ear right"></div>
@@ -305,7 +396,35 @@
                 <div class="chibi-msg">ไงล่ะ ดาโนดิว่ะ! 😎</div>
             </div>
         </div>
+
+        <div class="choice-container" id="choice-box">
+            <div class="choice-title">เลือกมาเดี๋ยวนี้! 🤫</div>
+            <div style="display: flex; justify-content: center; align-items: center; width: 100%; min-height: 150px; position: relative;">
+                <button class="force-btn" id="btn-dano" onclick="selectDano()">ดาโน</button>
+                <button class="force-btn" id="btn-noda" onclick="clickNoda()">โนดา</button>
+            </div>
+        </div>
     </div>
+
+    <!-- หน้าจอเล่นแผ่นเสียงแบบใหม่สุดน่ารัก -->
+    <div id="page-music-player" class="page-section">
+        
+        <!-- ตัวการ์ตูนประดับตกแต่ง -->
+        <div class="cute-char char-left">🐰🌷</div>
+        <div class="cute-char char-right">🧸🎀</div>
+
+        <div class="vinyl-wrapper">
+            <div class="vinyl-record">
+                <div class="vinyl-center">
+                    <img src="https://i.ibb.co/5XY7sDsz/IMG-1784.jpg" alt="IMG-1784">
+                    <div class="vinyl-hole"></div>
+                </div>
+            </div>
+        </div>
+        <h1 style="color: #ff3385; font-size: 34px; z-index: 5; text-shadow: 2px 2px 0px #fff, 0 0 15px rgba(255,255,255,0.8);">Now Playing... 🎵</h1>
+    </div>
+
+    <audio id="myAudio" src="https://unusual-gray-rrozqwcq.edgeone.dev/v1c044g50000d8eknpvog65k1qdorh9g.mp3"></audio>
 
     <script>
         const texts = {
@@ -318,6 +437,10 @@
                 content: 'กูชอบเขียนโค้ด หาเมคไปทั่วส่วนใหญ่โม้คแทนเมค แล้วก็เรื้อนจับคนอื่นทำเมียไปทั่วครับ<br><br>แต่ถามว่ากุสนมั้ย หึไม่ จริงๆกุมีเมียหลวงชื่อโน- อะแฮ่ม แล้วแต่จะคิดวะ พวกเมียน้อยกุหมด'
             }
         };
+
+        let nodaClickCount = 0;
+        let textInterval;
+        let heartInterval;
 
         function switchImage(button) {
             selectBtn(button);
@@ -370,10 +493,94 @@
             setTimeout(() => {
                 panda.classList.remove('anim-spin');
                 panda.classList.add('anim-dance');
+                
+                setTimeout(() => {
+                    document.getElementById('panda-dance-box').style.display = 'none';
+                    document.getElementById('choice-box').style.display = 'flex';
+                }, 3000);
+
             }, 1000);
         }
 
-        /* [แก้ไข] อัปเดตการทำงานของ Sparkle ให้ดึงค่าสีและสร้าง Element ได้แม่นยำขึ้น */
+        function clickNoda() {
+            nodaClickCount++;
+            const btnNoda = document.getElementById('btn-noda');
+            
+            if (nodaClickCount === 1) {
+                btnNoda.style.position = 'absolute';
+                const randomX = Math.floor(Math.random() * 70) + 15; 
+                const randomY = Math.floor(Math.random() * 70) + 15; 
+                btnNoda.style.left = randomX + 'vw';
+                btnNoda.style.top = randomY + 'vh';
+            } else if (nodaClickCount >= 2) {
+                btnNoda.style.display = 'none';
+            }
+        }
+
+        function selectDano() {
+            goToPage('page-music-player');
+            const audio = document.getElementById('myAudio');
+            audio.play();
+
+            // เริ่มโปรยคำศัพท์ และ ปล่อยหัวใจลอย
+            textInterval = setInterval(createFloatingText, 600);
+            heartInterval = setInterval(createFloatingHeart, 300);
+
+            audio.onended = function() {
+                clearInterval(textInterval);
+                clearInterval(heartInterval);
+            };
+        }
+
+        function createFloatingText() {
+            const words = ['ดาโน', 'ไอ้ดารักเมียที่สุดในโลก'];
+            const randomWord = words[Math.floor(Math.random() * words.length)];
+            
+            const textElem = document.createElement('div');
+            textElem.classList.add('floating-text');
+            textElem.innerText = randomWord;
+
+            const startX = Math.random() * 100;
+            const moveX = (Math.random() - 0.5) * 40; 
+            const duration = Math.random() * 3 + 3; 
+            const fontSize = Math.floor(Math.random() * 16) + 24; 
+
+            textElem.style.left = startX + 'vw';
+            textElem.style.fontSize = fontSize + 'px';
+            textElem.style.animationDuration = duration + 's';
+            textElem.style.setProperty('--moveX', moveX + 'vw');
+            
+            // ใช้สีเข้มๆ เพื่อตัดกับพื้นหลังสีชมพูอ่อน
+            const colors = ['#ff1a75', '#d81b60', '#ff3385', '#ff4da6'];
+            textElem.style.color = colors[Math.floor(Math.random() * colors.length)];
+
+            document.getElementById('page-music-player').appendChild(textElem);
+
+            textElem.addEventListener('animationend', function() { textElem.remove(); });
+        }
+
+        // ฟังก์ชันสร้างหัวใจลอยขึ้นข้างบน
+        function createFloatingHeart() {
+            const hearts = ['💖', '💗', '🩷', '💕', '🌸', '✨'];
+            const randomHeart = hearts[Math.floor(Math.random() * hearts.length)];
+            
+            const heartElem = document.createElement('div');
+            heartElem.classList.add('floating-heart');
+            heartElem.innerText = randomHeart;
+
+            const startX = Math.random() * 100;
+            const duration = Math.random() * 3 + 4; // 4 - 7 วิ
+            const size = Math.floor(Math.random() * 15) + 15; // 15px - 30px
+
+            heartElem.style.left = startX + 'vw';
+            heartElem.style.fontSize = size + 'px';
+            heartElem.style.animationDuration = duration + 's';
+
+            document.getElementById('page-music-player').appendChild(heartElem);
+
+            heartElem.addEventListener('animationend', function() { heartElem.remove(); });
+        }
+
         document.addEventListener('click', function(e) {
             for (let i = 0; i < 5; i++) {
                 const sparkle = document.createElement('div');
