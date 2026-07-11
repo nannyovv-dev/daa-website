@@ -227,69 +227,98 @@
         #btn-noda { position: relative; transition: left 0.2s ease, top 0.2s ease; }
 
         /* =========================================
-           หน้าแผ่นเสียง สีชมพูนมสุดน่ารัก 🎀
+           หน้าแผ่นเสียง พื้นหลังพลุขยับได้ (สีเดิมธรรมชาติ ไม่ย้อมชมพู) 🎆
            ========================================= */
         #page-music-player {
-            background: radial-gradient(circle, #fff0f5, #ffb6c1); /* ชมพูนมๆอ่อนๆ */
             width: 100%; height: 100vh; overflow: hidden; position: relative;
+            background-color: #000; /* พื้นหลังสำรองสีดำเพื่อให้พลุสีสดเด่นชัด */
         }
         
-        /* แผ่นเสียงสีชมพู */
-        .vinyl-wrapper { position: relative; width: 280px; height: 280px; margin-bottom: 40px; z-index: 5; }
+        /* เลเยอร์พลุ GIF สีเดิมธรรมชาติ ไม่โดนฟิลเตอร์สีชมพูบังบัง */
+        .fireworks-bg {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url('https://i.ibb.co/5DXw9C0/179-A8-FBC-E210-4-B32-A6-C0-E4504-DA577-B6.gif');
+            background-size: cover; background-position: center; z-index: 1; opacity: 1;
+        }
+
+        /* กรอบแนวนอนยาวๆ ครอบแผ่นเสียง เพิ่มกรอบสีขาวและเงาเด่นๆ */
+        .horizontal-frame-container {
+            position: relative; width: 90%; max-width: 440px; height: 260px;
+            background-image: url('https://i.ibb.co/QjpTR64j/IMG-1785.jpg'); /* รูปที่ 1 */
+            background-size: 100% 100%; background-repeat: no-repeat;
+            display: flex; justify-content: center; align-items: center;
+            z-index: 5; margin-bottom: 20px;
+            border: 6px solid #ffffff; /* กรอบสีขาว */
+            box-shadow: 0 0 25px rgba(255, 255, 255, 0.7), 0 15px 35px rgba(0,0,0,0.5); /* เงากรอบสีขาวรอบๆ */
+            border-radius: 20px;
+        }
+        
+        /* ตัวแผ่นเสียงที่อยู่ข้างในกรอบแนวนอน */
         .vinyl-record {
-            width: 100%; height: 100%; 
+            width: 170px; height: 170px; 
             background: repeating-radial-gradient(
-                #ffb6c1, 
-                #ffb6c1 8px, 
-                #ff99cc 10px, 
-                #ff99cc 18px
-            ); /* แผ่นเสียงลายร่องสีชมพู */
-            border-radius: 50%; border: 6px solid #fff; 
-            box-shadow: 0 10px 30px rgba(255, 105, 180, 0.4);
+                #333333, 
+                #333333 6px, 
+                #222222 7px, 
+                #111111 12px
+            );
+            border-radius: 50%; border: 4px solid rgba(255, 255, 255, 0.9); 
+            box-shadow: 0 0 15px rgba(0,0,0,0.3);
             display: flex; justify-content: center; align-items: center;
             animation: spinRecord 4s linear infinite;
         }
         
-        /* แกนกลางใส่รูป */
+        /* แกนกลางใส่รูป (รูปที่ 2) */
         .vinyl-center { 
-            width: 120px; height: 120px; background: #fff; border-radius: 50%; 
-            border: 5px solid #fff; display: flex; justify-content: center; align-items: center; 
+            width: 75px; height: 75px; background: #fff; border-radius: 50%; 
+            border: 2px solid #fff; display: flex; justify-content: center; align-items: center; 
             overflow: hidden; position: relative;
-            box-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+            box-shadow: 0 0 8px rgba(0,0,0,0.2);
         }
         .vinyl-center img { width: 100%; height: 100%; object-fit: cover; }
         
         /* รูตรงกลางแผ่นเสียง */
         .vinyl-hole {
-            position: absolute; width: 14px; height: 14px; background: #fff0f5; 
-            border-radius: 50%; border: 2px solid rgba(0,0,0,0.1);
+            position: absolute; width: 10px; height: 10px; background: #ffffff; 
+            border-radius: 50%; border: 1px solid rgba(0,0,0,0.2);
         }
         
         @keyframes spinRecord { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
+        /* ข้อความพินอินใต้แผ่นเสียง แสงนีออนแวววับอยู่คงที่ */
+        .neon-pinyin-text {
+            font-size: 38px; font-weight: bold; color: #fff; text-align: center;
+            z-index: 5; margin-bottom: 25px; letter-spacing: 2px;
+            text-shadow: 0 0 7px #fff, 0 0 10px #ff3399, 0 0 21px #ff3399, 0 0 42px #ff3399;
+            animation: neonPulse 1.5s ease-in-out infinite alternate;
+        }
+        @keyframes neonPulse {
+            from { text-shadow: 0 0 7px #fff, 0 0 10px #ff3399, 0 0 21px #ff3399, 0 0 35px #ff3399; }
+            to { text-shadow: 0 0 4px #fff, 0 0 7px #ff3399, 0 0 14px #ff3399, 0 0 25px #ff3399; }
+        }
+
         /* ข้อความที่ลอยบนหน้าจอ */
         .floating-text {
             position: absolute; font-weight: bold; pointer-events: none;
-            /* ทำให้ขอบตัวหนังสือสีขาวชัดเจน ตัดกับพื้นชมพู */
             text-shadow: 2px 2px 0px #fff, -2px -2px 0px #fff, 2px -2px 0px #fff, -2px 2px 0px #fff, 0 5px 15px rgba(255,105,180,0.4);
-            animation: fallAndFade linear forwards; z-index: 2; white-space: nowrap;
+            animation: fallAndFade linear forwards; z-index: 6; white-space: nowrap;
         }
         
         /* หัวใจเล็กๆ ลอยขึ้น */
         .floating-heart {
-            position: absolute; pointer-events: none; z-index: 3; font-size: 20px;
+            position: absolute; pointer-events: none; z-index: 6; font-size: 20px;
             animation: floatUp 5s linear forwards;
             filter: drop-shadow(0 0 5px rgba(255,255,255,0.8));
         }
 
         /* ตัวการ์ตูนตกแต่งด้านข้าง */
         .cute-char {
-            position: absolute; font-size: 55px; z-index: 4;
+            position: absolute; font-size: 55px; z-index: 7;
             animation: bobbing 2s infinite alternate ease-in-out;
             filter: drop-shadow(0 5px 5px rgba(255,105,180,0.3));
         }
-        .char-left { left: 10vw; bottom: 20vh; animation-delay: 0s; }
-        .char-right { right: 10vw; bottom: 25vh; animation-delay: 1s; }
+        .char-left { left: 8vw; bottom: 12vh; animation-delay: 0s; }
+        .char-right { right: 8vw; bottom: 15vh; animation-delay: 1s; }
 
         @keyframes fallAndFade {
             0% { transform: translateY(-10vh) translateX(0) scale(0.5); opacity: 0; }
@@ -406,25 +435,28 @@
         </div>
     </div>
 
-    <!-- หน้าจอเล่นแผ่นเสียงแบบใหม่สุดน่ารัก -->
     <div id="page-music-player" class="page-section">
         
-        <!-- ตัวการ์ตูนประดับตกแต่ง -->
+        <div class="fireworks-bg"></div>
+        
         <div class="cute-char char-left">🐰🌷</div>
         <div class="cute-char char-right">🧸🎀</div>
 
-        <div class="vinyl-wrapper">
+        <div class="horizontal-frame-container">
             <div class="vinyl-record">
                 <div class="vinyl-center">
-                    <img src="https://i.ibb.co/5XY7sDsz/IMG-1784.jpg" alt="IMG-1784">
+                    <img src="https://i.ibb.co/0pz8h0LK/IMG-1787.jpg" alt="IMG-1787">
                     <div class="vinyl-hole"></div>
                 </div>
             </div>
         </div>
-        <h1 style="color: #ff3385; font-size: 34px; z-index: 5; text-shadow: 2px 2px 0px #fff, 0 0 15px rgba(255,255,255,0.8);">Now Playing... 🎵</h1>
+
+        <div class="neon-pinyin-text">“ Wǒ ài nǐ ”</div>
+        
+        <h1 style="color: #ffffff; font-size: 34px; z-index: 5; text-shadow: 0 0 10px #ff3399, 0 0 20px rgba(255,255,255,0.8);">Now Playing... 🎵</h1>
     </div>
 
-    <audio id="myAudio" src="https://unusual-gray-rrozqwcq.edgeone.dev/v1c044g50000d8eknpvog65k1qdorh9g.mp3"></audio>
+    <audio id="myAudio" src="https://average-black-ornamueg.edgeone.dev/v14044g50000d3h11c7og65in45sue5g.mp3"></audio>
 
     <script>
         const texts = {
@@ -522,7 +554,6 @@
             const audio = document.getElementById('myAudio');
             audio.play();
 
-            // เริ่มโปรยคำศัพท์ และ ปล่อยหัวใจลอย
             textInterval = setInterval(createFloatingText, 600);
             heartInterval = setInterval(createFloatingHeart, 300);
 
@@ -550,8 +581,7 @@
             textElem.style.animationDuration = duration + 's';
             textElem.style.setProperty('--moveX', moveX + 'vw');
             
-            // ใช้สีเข้มๆ เพื่อตัดกับพื้นหลังสีชมพูอ่อน
-            const colors = ['#ff1a75', '#d81b60', '#ff3385', '#ff4da6'];
+            const colors = ['#ff1a75', '#ffffff', '#ff66b2', '#ffff99', '#66ffff'];
             textElem.style.color = colors[Math.floor(Math.random() * colors.length)];
 
             document.getElementById('page-music-player').appendChild(textElem);
@@ -559,7 +589,6 @@
             textElem.addEventListener('animationend', function() { textElem.remove(); });
         }
 
-        // ฟังก์ชันสร้างหัวใจลอยขึ้นข้างบน
         function createFloatingHeart() {
             const hearts = ['💖', '💗', '🩷', '💕', '🌸', '✨'];
             const randomHeart = hearts[Math.floor(Math.random() * hearts.length)];
@@ -569,8 +598,8 @@
             heartElem.innerText = randomHeart;
 
             const startX = Math.random() * 100;
-            const duration = Math.random() * 3 + 4; // 4 - 7 วิ
-            const size = Math.floor(Math.random() * 15) + 15; // 15px - 30px
+            const duration = Math.random() * 3 + 4; 
+            const size = Math.floor(Math.random() * 15) + 15; 
 
             heartElem.style.left = startX + 'vw';
             heartElem.style.fontSize = size + 'px';
