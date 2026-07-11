@@ -4,378 +4,325 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panda Profile</title>
-    <!-- เพิ่มฟอนต์น่ารักๆ เพื่อความตะมุตะมิ -->
     <link href="https://fonts.googleapis.com/css2?family=Itim&display=swap" rel="stylesheet">
     <style>
         /* --- General Setup --- */
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Itim', cursive, sans-serif; /* ใช้ฟอนต์น่ารัก */
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Itim', cursive, sans-serif; }
 
         body {
-            background-color: #f0f4f2; /* พื้นหลังสีเทาอมเขียวอ่อนๆ อารมณ์ป่าไผ่ */
-            color: #333333;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            overflow-x: hidden;
-            position: relative;
-            background-image: 
-                radial-gradient(#e0e8e4 2px, transparent 2px),
-                radial-gradient(#e0e8e4 2px, transparent 2px);
-            background-size: 40px 40px;
-            background-position: 0 0, 20px 20px;
+            background-color: #f0f4f2; color: #333333;
+            display: flex; justify-content: center; align-items: center;
+            min-height: 100vh; overflow: hidden; position: relative;
+            background-image: radial-gradient(#e0e8e4 2px, transparent 2px), radial-gradient(#e0e8e4 2px, transparent 2px);
+            background-size: 40px 40px; background-position: 0 0, 20px 20px;
         }
 
-        /* --- Main Container (กรอบใหญ่ๆ สีขาว) --- */
+        /* --- Page Management --- */
+        .page-section {
+            display: none; width: 100%; height: 100vh; position: absolute;
+            top: 0; left: 0; justify-content: center; align-items: center;
+            flex-direction: column; animation: fadeInPage 0.5s ease;
+        }
+        .page-section.active { display: flex; }
+        @keyframes fadeInPage { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+
+        /* --- Main Container (หน้าแรก) --- */
         .main-container {
-            background-color: #ffffff;
-            width: 90%;
-            max-width: 450px;
-            border-radius: 30px; /* ขอบมนขึ้นให้ดูน่ารัก */
-            padding: 35px 25px 45px 25px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
-            text-align: center;
-            border: 3px solid #f2f2f2;
-            position: relative;
-            z-index: 10;
+            background-color: #ffffff; width: 90%; max-width: 450px;
+            border-radius: 30px; padding: 35px 25px 45px 25px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08); text-align: center;
+            border: 3px solid #f2f2f2; position: relative; z-index: 10;
         }
 
-        /* หูแพนด้าแบบมีมิติและน่ารักขึ้น */
         .main-container::before, .main-container::after {
-            content: '';
-            position: absolute;
-            top: -25px;
-            width: 75px;
-            height: 75px;
-            background-color: #333333;
-            border-radius: 50%;
-            z-index: -1;
-            /* เพิ่มวงกลมด้านในหู */
+            content: ''; position: absolute; top: -25px; width: 75px; height: 75px;
+            background-color: #333333; border-radius: 50%; z-index: -1;
             background-image: radial-gradient(circle at center, #f5f5f5 35%, #333333 40%);
         }
         .main-container::before { left: 35px; transform: rotate(-15deg); }
         .main-container::after { right: 35px; transform: rotate(15deg); }
 
-        /* อุ้งเท้าแพนด้าเกาะขอบล่าง */
         .paw {
-            position: absolute;
-            bottom: -20px;
-            width: 50px;
-            height: 35px;
-            background-color: #333333;
-            border-radius: 50px 50px 30px 30px;
-            z-index: 11;
+            position: absolute; bottom: -20px; width: 50px; height: 35px;
+            background-color: #333333; border-radius: 50px 50px 30px 30px; z-index: 11;
         }
-        .paw::before, .paw::after, .paw-center {
-            content: '';
-            position: absolute;
-            background-color: #ffffff;
-            border-radius: 50%;
-        }
-        /* นิ้วเท้า */
+        .paw::before, .paw::after, .paw-center { content: ''; position: absolute; background-color: #ffffff; border-radius: 50%; }
         .paw::before { width: 12px; height: 14px; top: -5px; left: 6px; transform: rotate(-15deg); }
         .paw::after { width: 12px; height: 14px; top: -5px; right: 6px; transform: rotate(15deg); }
         .paw-center { width: 12px; height: 14px; top: -8px; left: 19px; }
-        .paw-pad {
-            position: absolute;
-            width: 26px;
-            height: 16px;
-            background-color: #ffffff;
-            border-radius: 50%;
-            bottom: 6px;
-            left: 12px;
-        }
-        .paw.left { left: 50px; }
-        .paw.right { right: 50px; }
+        .paw-pad { position: absolute; width: 26px; height: 16px; background-color: #ffffff; border-radius: 50%; bottom: 6px; left: 12px; }
+        .paw.left { left: 50px; } .paw.right { right: 50px; }
 
-        h1 {
-            color: #333333;
-            font-size: 28px;
-            margin-bottom: 25px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-        }
+        h1 { color: #333333; font-size: 28px; margin-bottom: 25px; display: flex; align-items: center; justify-content: center; gap: 10px; }
 
-        /* --- Image Wrapper & Dark Gray Neon Effect --- */
+        /* --- Image Wrapper --- */
         .image-frame {
-            position: relative;
-            width: 220px;
-            height: 220px; 
-            margin: 0 auto 25px auto;
-            border-radius: 20px;
-            overflow: hidden;
-            background: #fff;
-            padding: 6px;
-            /* เพิ่มแสงเรืองรองสีเทาเข้มรอบนอก */
+            position: relative; width: 220px; height: 220px; margin: 0 auto 25px auto;
+            border-radius: 20px; overflow: hidden; background: #fff; padding: 6px;
             box-shadow: 0 0 20px rgba(68, 68, 68, 0.4);
         }
-
-        /* แสงนีออน "สีเทาเข้ม" วิ่งรอบกรอบรูป */
         .image-frame::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            /* ใช้สีเทาเข้ม (#444, #555) แทนสีขาว */
+            content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
             background: conic-gradient(transparent, transparent, transparent, #444444);
             animation: rotateNeon 3s linear infinite;
         }
+        @keyframes rotateNeon { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
-        @keyframes rotateNeon {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        .image-frame-inner {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            background: #fff;
-            border-radius: 14px;
-            overflow: hidden;
-            z-index: 1;
-        }
-
-        .image-frame-inner img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover; 
-            display: none;
-        }
-
-        .image-frame-inner img.active {
-            display: block;
-            animation: fadeIn 0.4s ease-in-out;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: scale(0.95); }
-            to { opacity: 1; transform: scale(1); }
-        }
+        .image-frame-inner { position: relative; width: 100%; height: 100%; background: #fff; border-radius: 14px; overflow: hidden; z-index: 1; }
+        .image-frame-inner img { width: 100%; height: 100%; object-fit: cover; display: none; }
+        .image-frame-inner img.active { display: block; animation: fadeIn 0.4s ease-in-out; }
 
         /* --- Buttons --- */
         .btn {
-            display: block;
-            width: 100%;
+            display: block; width: 100%; background-color: #ffffff; color: #333333;
+            border: 2px dashed #cccccc; padding: 14px; margin-bottom: 12px;
+            border-radius: 20px; font-size: 18px; text-decoration: none;
+            cursor: pointer; transition: all 0.3s ease; position: relative; overflow: hidden;
+        }
+        .btn:hover { background-color: #f9f9f9; transform: translateY(-2px); }
+        .btn.selected { border: 2px solid #333333; background-color: #333333; box-shadow: 0 0 15px rgba(51, 51, 51, 0.4); color: #ffffff; font-weight: bold; }
+        .btn-next { background-color: #333333; color: #ffffff; margin-top: 25px; border: 2px solid #333333; font-size: 20px; }
+        .btn-next:hover { background-color: #444444; box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
+
+        /* --- Loading Screen --- */
+        .loading-bg { background-color: #ffffff; z-index: 100; }
+        .loader { width: 50px; height: 50px; border: 6px solid #f3f3f3; border-top: 6px solid #333333; border-radius: 50%; animation: spin 1s linear infinite; margin-bottom: 20px; }
+        .loading-text { font-size: 24px; font-weight: bold; color: #333; animation: pulse 1s infinite alternate; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        @keyframes pulse { 0% { opacity: 0.5; } 100% { opacity: 1; } }
+
+        /* --- Floating Menu (หน้าเลือกปุ่ม) --- */
+        .menu-title { font-size: 28px; margin-bottom: 40px; color: #333; text-shadow: 2px 2px 0 #fff; }
+        .floating-btn {
+            background: #ffffff; color: #333; font-size: 22px; font-weight: bold;
+            padding: 20px 40px; margin: 15px; border-radius: 30px;
+            border: 3px solid #333; cursor: pointer;
+            box-shadow: 0 10px 0 #333, 0 15px 20px rgba(0,0,0,0.2);
+            transition: all 0.2s; position: relative;
+            animation: floatUpDown 3s ease-in-out infinite alternate;
+        }
+        .floating-btn:nth-child(2) { animation-delay: 1s; }
+        .floating-btn:active { transform: translateY(10px); box-shadow: 0 0 0 #333; }
+        @keyframes floatUpDown { 0% { transform: translateY(0); } 100% { transform: translateY(-15px); } }
+
+        /* --- Scrollable Reading Page --- */
+        .reading-box {
+            background: #fff; width: 90%; max-width: 400px;
+            border-radius: 20px; border: 4px solid #333; padding: 20px; position: relative; box-shadow: 0 0 20px rgba(255,255,255,0.8);
+        }
+        .reading-box::before { content: '🐼'; position: absolute; top: -30px; left: 50%; transform: translateX(-50%); font-size: 45px; background: #fff; border-radius: 50%; padding: 0 10px; border: 4px solid #333; }
+        .reading-title { font-size: 24px; text-align: center; margin-top: 15px; margin-bottom: 15px; border-bottom: 2px dashed #ccc; padding-bottom: 10px;}
+        .scroll-content { max-height: 250px; overflow-y: auto; font-size: 20px; line-height: 1.6; text-align: left; padding-right: 10px; color: #444; }
+        .scroll-content::-webkit-scrollbar { width: 8px; }
+        .scroll-content::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 10px; }
+        .scroll-content::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
+        
+        .btn-back { margin-top: 20px; background: #eee; color: #333; }
+        .btn-finish { background: #333; color: #fff; margin-top: 10px; border: none; }
+
+        /* =========================================
+           DISCO BACKGROUND (ผับดิสโก้แสงสี)
+           ========================================= */
+        #page-dance {
+            background: linear-gradient(45deg, #ff007f, #7f00ff, #00ffff, #00ff00, #ffff00, #ff0000);
+            background-size: 400% 400%;
+            animation: discoColors 2s infinite, strobeEffect 0.4s infinite alternate;
+            position: relative;
+            z-index: 1;
+        }
+
+        #page-dance::before {
+            content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+            background: conic-gradient(transparent, rgba(255,255,255,0.4), transparent, rgba(255,255,255,0.4), transparent);
+            animation: rotateNeon 4s linear infinite; z-index: -1; pointer-events: none;
+        }
+
+        @keyframes discoColors {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes strobeEffect {
+            0% { filter: brightness(1) contrast(1.2); }
+            100% { filter: brightness(1.5) contrast(1.5); }
+        }
+
+        /* =========================================
+           CHIBI PANDA CSS ART
+           ========================================= */
+        .chibi-container { text-align: center; z-index: 10; }
+        .chibi-panda {
+            position: relative; width: 140px; height: 180px; margin: 0 auto;
+            transform-origin: bottom center;
+        }
+        
+        /* หัว */
+        .p-head { position: absolute; width: 120px; height: 95px; background: #fff; border: 5px solid #333; border-radius: 50% 50% 45% 45%; top: 15px; left: 10px; z-index: 3; }
+        .p-ear { position: absolute; width: 40px; height: 35px; background: #333; border-radius: 50%; top: 5px; z-index: 1; }
+        .p-ear.left { left: 5px; transform: rotate(-20deg); } .p-ear.right { right: 5px; transform: rotate(20deg); }
+        .p-eye { position: absolute; width: 28px; height: 38px; background: #333; border-radius: 50%; top: 35px; }
+        .p-eye.left { left: 20px; transform: rotate(-15deg); } .p-eye.right { right: 20px; transform: rotate(15deg); }
+        .p-pupil { position: absolute; width: 10px; height: 10px; background: #fff; border-radius: 50%; top: 6px; right: 6px; }
+        .p-nose { position: absolute; width: 16px; height: 10px; background: #333; border-radius: 50%; top: 68px; left: 47px; }
+        .p-blush { position: absolute; width: 18px; height: 10px; background: #ff99cc; border-radius: 50%; top: 60px; opacity: 0.8; }
+        .p-blush.left { left: 8px; } .p-blush.right { right: 8px; }
+        
+        /* ลำตัว */
+        .p-body { position: absolute; width: 85px; height: 75px; background: #fff; border: 5px solid #333; border-radius: 40% 40% 45% 45%; top: 95px; left: 27px; z-index: 2; }
+        
+        /* ขา */
+        .p-leg { position: absolute; width: 30px; height: 35px; background: #333; border-radius: 10px 10px 20px 20px; top: 150px; z-index: 1; }
+        .p-leg.left { left: 35px; } .p-leg.right { right: 35px; }
+
+        /* [แก้ไข] ปรับแต่งส่วนแขนท้าวเอวให้สมบูรณ์และแสดงผลถูกต้อง */
+        .p-arm { position: absolute; width: 30px; height: 45px; background: #333; border: 5px solid #333; top: 100px; z-index: 1; }
+        .p-arm.left { left: 8px; border-radius: 20px 0 0 20px; transform: rotate(-35deg); }
+        .p-arm.right { right: 8px; border-radius: 0 20px 20px 0; transform: rotate(35deg); }
+        
+        /* มือจับเอว */
+        .p-hand { position: absolute; width: 18px; height: 18px; background: #333; border-radius: 50%; top: 122px; z-index: 4; }
+        .p-hand.left { left: 23px; }
+        .p-hand.right { right: 23px; }
+
+        /* กล่องข้อความสุดท้าย */
+        .chibi-msg {
+            font-size: 26px; margin-top: 40px; font-weight: bold;
+            background: rgba(255, 255, 255, 0.95); padding: 12px 28px;
+            border-radius: 20px; border: 3px dashed #333;
+            box-shadow: 0 0 25px rgba(255, 255, 255, 1);
+            position: relative; z-index: 20; color: #000;
+            display: inline-block;
+        }
+
+        /* Animations for Panda */
+        .anim-spin { animation: spinChar 1s cubic-bezier(0.4, 0, 0.2, 1); }
+        .anim-dance { animation: danceChar 0.5s infinite alternate ease-in-out; }
+        
+        @keyframes spinChar { 0% { transform: rotate(0deg) scale(0.5); } 100% { transform: rotate(360deg) scale(1); } }
+        @keyframes danceChar { 
+            0% { transform: rotate(-10deg) translateY(-5px); } 
+            100% { transform: rotate(10deg) translateY(5px); } 
+        }
+
+        /* Sparkle Element */
+        .sparkle { 
+            position: absolute; 
+            width: 15px; 
+            height: 15px; 
+            pointer-events: none; 
+            animation: flyOut 0.6s ease-out forwards; 
+            z-index: 9999; 
             background-color: #ffffff;
-            color: #333333;
-            border: 2px dashed #cccccc; /* ขอบปุ่มแบบเส้นประดูน่ารัก */
-            padding: 14px;
-            margin-bottom: 12px;
-            border-radius: 20px;
-            font-size: 18px;
-            text-decoration: none;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .btn:hover {
-            background-color: #f9f9f9;
-            transform: translateY(-2px);
-        }
-
-        /* เมื่อกด/เลือกอันไหน จะเรืองแสงและเปลี่ยนสไตล์ */
-        .btn.selected {
-            border: 2px solid #333333;
-            background-color: #333333;
-            box-shadow: 0 0 15px rgba(51, 51, 51, 0.4);
-            color: #ffffff;
-            font-weight: bold;
-        }
-
-        .btn-next {
-            background-color: #333333;
-            color: #ffffff;
-            margin-top: 25px;
-            border: 2px solid #333333;
-            font-size: 20px;
-        }
-        .btn-next:hover {
-            background-color: #444444;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-        }
-
-        /* --- Pop-up & Neon Frame --- */
-        .popup-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(3px);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 999;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.3s ease;
-        }
-
-        .popup-overlay.active {
-            opacity: 1;
-            pointer-events: auto;
-        }
-
-        .popup-content {
-            background: #ffffff;
-            padding: 40px 30px;
-            border-radius: 30px;
-            width: 85%;
-            max-width: 350px;
-            text-align: center;
-            position: relative;
-            /* แสงนีออนสีขาววิ่งรอบป๊อบอัพ */
-            border: 3px solid #ffffff;
-            box-shadow: 0 0 20px #ffffff, inset 0 0 20px #ffffff;
-            animation: popupNeon 1.5s ease-in-out infinite alternate;
-        }
-
-        /* ตกแต่งป๊อบอัพให้เป็นหัวแพนด้า */
-        .popup-content::before, .popup-content::after {
-            content: '';
-            position: absolute;
-            top: -20px;
-            width: 50px;
-            height: 50px;
-            background-color: #333333;
-            border-radius: 50%;
-            z-index: -1;
-        }
-        .popup-content::before { left: 20px; }
-        .popup-content::after { right: 20px; }
-
-        @keyframes popupNeon {
-            from { box-shadow: 0 0 10px #fff, inset 0 0 10px #fff; }
-            to { box-shadow: 0 0 30px #fff, inset 0 0 20px #fff; }
-        }
-
-        .popup-text {
-            color: #333333;
-            font-size: 22px;
-            line-height: 1.5;
-            margin-bottom: 25px;
-        }
-
-        .close-popup {
-            background: #333333;
-            color: white;
-            border: none;
-            padding: 12px 30px;
-            border-radius: 15px;
-            cursor: pointer;
-            font-size: 18px;
-            transition: transform 0.2s;
-        }
-        .close-popup:active {
-            transform: scale(0.95);
-        }
-
-        /* --- Sparkle Effect (วิ้งๆ ตอนคลิก) --- */
-        .sparkle {
-            position: absolute;
-            width: 10px;
-            height: 10px;
-            background: #ffffff;
             clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
-            pointer-events: none;
-            animation: flyOut 0.6s ease-out forwards;
-            z-index: 9999;
         }
-
-        @keyframes flyOut {
-            0% { transform: translate(0, 0) scale(1) rotate(0deg); opacity: 1; }
-            100% { transform: translate(var(--mx), var(--my)) scale(0) rotate(180deg); opacity: 0; }
-        }
-
-        /* ตกแต่งใบไผ่ลอยๆ พื้นหลัง */
-        .bamboo-leaf {
-            position: fixed;
-            font-size: 30px;
-            color: rgba(100, 150, 100, 0.2);
-            z-index: -2;
-            pointer-events: none;
-            animation: float 6s ease-in-out infinite alternate;
-        }
-        @keyframes float {
-            0% { transform: translateY(0px) rotate(0deg); }
-            100% { transform: translateY(20px) rotate(15deg); }
-        }
+        @keyframes flyOut { 0% { transform: translate(0, 0) scale(1) rotate(0deg); opacity: 1; } 100% { transform: translate(var(--mx), var(--my)) scale(0) rotate(180deg); opacity: 0; } }
     </style>
 </head>
 <body>
 
-    <!-- ใบไผ่ตกแต่งพื้นหลัง -->
-    <div class="bamboo-leaf" style="top: 10%; left: 10%;">🎋</div>
-    <div class="bamboo-leaf" style="top: 70%; left: 5%; animation-delay: 1s;">🌿</div>
-    <div class="bamboo-leaf" style="top: 20%; right: 10%; animation-delay: 2s;">🐾</div>
-    <div class="bamboo-leaf" style="top: 80%; right: 15%; animation-delay: 1.5s;">🎋</div>
+    <div style="position:fixed; top:10%; left:10%; font-size:30px; opacity:0.3; z-index:-10;">🎋</div>
+    <div style="position:fixed; top:70%; left:5%; font-size:30px; opacity:0.3; z-index:-10;">🌿</div>
+    <div style="position:fixed; top:20%; right:10%; font-size:30px; opacity:0.3; z-index:-10;">🐾</div>
+    <div style="position:fixed; top:80%; right:15%; font-size:30px; opacity:0.3; z-index:-10;">🎋</div>
 
-    <!-- Main Card -->
-    <div class="main-container">
-        <h1>🐾 Panda Space 🐾</h1>
-        
-        <!-- รูปทรงสี่เหลี่ยม พร้อมกรอบนีออนสีเทาเข้มวิ่ง -->
-        <div class="image-frame">
-            <div class="image-frame-inner">
-                <img src="https://i.ibb.co/4wmcZfB2/IMG-1756.jpg" alt="Image 1" id="img1" class="active">
-                <img src="https://i.ibb.co/wFZmn0hL/IMG-1757.jpg" alt="Image 2" id="img2">
+    <div id="page-main" class="page-section active">
+        <div class="main-container">
+            <h1>🐾 Panda Space 🐾</h1>
+            
+            <div class="image-frame">
+                <div class="image-frame-inner">
+                    <img src="https://i.ibb.co/4wmcZfB2/IMG-1756.jpg" alt="Image 1" id="img1" class="active">
+                    <img src="https://i.ibb.co/wFZmn0hL/IMG-1757.jpg" alt="Image 2" id="img2">
+                </div>
             </div>
-        </div>
 
-        <!-- ปุ่มสลับรูปภาพ -->
-        <button class="btn" id="btn-switch" onclick="switchImage(this)">🔄 สลับรูปภาพ</button>
+            <button class="btn" id="btn-switch" onclick="switchImage(this)">🔄 สลับรูปภาพ</button>
+            <hr style="border: 0; height: 2px; background: #eee; margin: 25px 0; border-radius: 2px;">
 
-        <hr style="border: 0; height: 2px; background: #eee; margin: 25px 0; border-radius: 2px;">
+            <a href="https://www.instagram.com/sdxzwcz.x?igsh=amJlN3k4d3l6OGhx&utm_source=qr" target="_blank" class="btn plat-btn" onclick="selectBtn(this)">📸 Instagram</a>
+            <a href="https://www.threads.com/@zczexx.o0?igshid=NTc4MTIwNjQ2YQ==" target="_blank" class="btn plat-btn" onclick="selectBtn(this)">🧵 Threads 1</a>
+            <a href="https://www.threads.com/@xdijlan.xx?igshid=NTc4MTIwNjQ2YQ==" target="_blank" class="btn plat-btn" onclick="selectBtn(this)">🧸 Threads 2 (แอครอง)</a>
 
-        <!-- ปุ่มแพลตฟอร์มต่างๆ -->
-        <a href="https://www.instagram.com/sdxzwcz.x?igsh=amJlN3k4d3l6OGhx&utm_source=qr" target="_blank" class="btn plat-btn" onclick="selectBtn(this)">📸 Instagram</a>
-        <a href="https://www.threads.com/@zczexx.o0?igshid=NTc4MTIwNjQ2YQ==" target="_blank" class="btn plat-btn" onclick="selectBtn(this)">🧵 Threads 1</a>
-        <a href="https://www.threads.com/@xdijlan.xx?igshid=NTc4MTIwNjQ2YQ==" target="_blank" class="btn plat-btn" onclick="selectBtn(this)">🧸 Threads 2 (แอครอง)</a>
+            <button class="btn btn-next" onclick="goToLoading('page-menu')">หน้าต่อไป ➔</button>
 
-        <!-- ปุ่มหน้าต่อไป (เปิด Pop-up) -->
-        <button class="btn btn-next" onclick="openPopup(this)">หน้าต่อไป ➔</button>
-
-        <!-- อุ้งเท้าแพนด้าด้านล่าง -->
-        <div class="paw left">
-            <div class="paw-center"></div>
-            <div class="paw-pad"></div>
-        </div>
-        <div class="paw right">
-            <div class="paw-center"></div>
-            <div class="paw-pad"></div>
+            <div class="paw left"><div class="paw-center"></div><div class="paw-pad"></div></div>
+            <div class="paw right"><div class="paw-center"></div><div class="paw-pad"></div></div>
         </div>
     </div>
 
-    <!-- Pop-up Window -->
-    <div class="popup-overlay" id="popup">
-        <div class="popup-content">
-            <div class="popup-text">
-                สวัสดี กูชื่อดาเรียนครับ 011 <br><br>ยินดีที่ได้รู้จัก (ดาโนดิว่ะ) 🐼
+    <div id="page-loading" class="page-section loading-bg">
+        <div class="loader"></div>
+        <div class="loading-text">กำลังดาวน์โหลดแป๊บนึง...</div>
+    </div>
+
+    <div id="page-menu" class="page-section">
+        <div class="menu-title">เลือกอ่านเลยครับ 🐼</div>
+        <button class="floating-btn" onclick="openReading('intro')">✨ การแนะนำตัว</button>
+        <button class="floating-btn" onclick="openReading('hobby')">🎮 งานอดิเรก</button>
+    </div>
+
+    <div id="page-reading" class="page-section">
+        <div class="reading-box">
+            <h2 class="reading-title" id="read-title">หัวข้อ</h2>
+            <div class="scroll-content" id="read-content"></div>
+            
+            <button class="btn btn-back" onclick="goToPage('page-menu')">⬅️ กลับไปเลือกใหม่</button>
+            <button class="btn btn-finish" onclick="goToEndLoading()">อ่านจบแล้ว (ไปต่อ) ➔</button>
+        </div>
+    </div>
+
+    <div id="page-loading-white" class="page-section" style="background: white; z-index: 999;">
+        <div class="loader"></div>
+        <div class="loading-text">กำลังเตรียมตัวเต้น...</div>
+    </div>
+
+    <div id="page-dance" class="page-section">
+        <div class="chibi-container">
+            <div class="chibi-panda" id="myPanda">
+                <div class="p-ear left"></div>
+                <div class="p-ear right"></div>
+                <div class="p-head">
+                    <div class="p-eye left"><div class="p-pupil"></div></div>
+                    <div class="p-eye right"><div class="p-pupil"></div></div>
+                    <div class="p-blush left"></div>
+                    <div class="p-blush right"></div>
+                    <div class="p-nose"></div>
+                </div>
+                
+                <div class="p-arm left"></div>
+                <div class="p-arm right"></div>
+                
+                <div class="p-body"></div>
+                
+                <div class="p-hand left"></div>
+                <div class="p-hand right"></div>
+                
+                <div class="p-leg left"></div>
+                <div class="p-leg right"></div>
             </div>
-            <button class="close-popup" onclick="closePopup()">ปิดหน้าต่าง</button>
+            <div>
+                <div class="chibi-msg">ไงล่ะ ดาโนดิว่ะ! 😎</div>
+            </div>
         </div>
     </div>
 
     <script>
-        // ฟังก์ชันสลับรูปภาพไปมา
+        const texts = {
+            'intro': {
+                title: 'การแนะนำตัว',
+                content: 'กูชื่อดาเรียน ปีเกิด 011 รุ้ดได้ไม่ซี 92mu ทุกคน<br><br>อันนี้กูอยากบอกถึงมึงจะไม่ถามกันก็เถอะ เห็นแบบนี้กูอยู่บ้านเขียว infp ครับ'
+            },
+            'hobby': {
+                title: 'งานอดิเรก',
+                content: 'กูชอบเขียนโค้ด หาเมคไปทั่วส่วนใหญ่โม้คแทนเมค แล้วก็เรื้อนจับคนอื่นทำเมียไปทั่วครับ<br><br>แต่ถามว่ากุสนมั้ย หึไม่ จริงๆกุมีเมียหลวงชื่อโน- อะแฮ่ม แล้วแต่จะคิดวะ พวกเมียน้อยกุหมด'
+            }
+        };
+
         function switchImage(button) {
             selectBtn(button);
             const img1 = document.getElementById('img1');
             const img2 = document.getElementById('img2');
-            
             if(img1.classList.contains('active')) {
                 img1.classList.remove('active');
                 img2.classList.add('active');
@@ -385,51 +332,65 @@
             }
         }
 
-        // ฟังก์ชันเมื่อกดเลือกปุ่มใดๆ จะเรืองแสงและเปลี่ยนสีค้างไว้
-        function selectBtn(element) {
-            element.classList.toggle('selected');
+        function selectBtn(element) { element.classList.toggle('selected'); }
+
+        function hideAllPages() {
+            document.querySelectorAll('.page-section').forEach(page => { page.classList.remove('active'); });
         }
 
-        // ฟังก์ชันเปิดป๊อบอัพ พร้อมสลับเป็นรูปที่ 2 อัตโนมัติ
-        function openPopup(button) {
-            selectBtn(button);
-            document.getElementById('popup').classList.add('active');
+        function goToPage(pageId) {
+            hideAllPages();
+            document.getElementById(pageId).classList.add('active');
+        }
+
+        function goToLoading(nextPageId) {
+            goToPage('page-loading');
+            setTimeout(() => { goToPage(nextPageId); }, 1500); 
+        }
+
+        function openReading(type) {
+            document.getElementById('read-title').innerHTML = texts[type].title;
+            document.getElementById('read-content').innerHTML = texts[type].content;
+            goToPage('page-reading');
+        }
+
+        function goToEndLoading() {
+            goToPage('page-loading-white');
+            setTimeout(() => {
+                goToPage('page-dance');
+                startPandaDance();
+            }, 1500); 
+        }
+
+        function startPandaDance() {
+            const panda = document.getElementById('myPanda');
+            panda.classList.remove('anim-dance');
+            panda.classList.add('anim-spin');
             
-            // บังคับเปลี่ยนเป็นรูปที่ 2
-            document.getElementById('img1').classList.remove('active');
-            document.getElementById('img2').classList.add('active');
+            setTimeout(() => {
+                panda.classList.remove('anim-spin');
+                panda.classList.add('anim-dance');
+            }, 1000);
         }
 
-        // ฟังก์ชันปิดป๊อบอัพ
-        function closePopup() {
-            document.getElementById('popup').classList.remove('active');
-        }
-
-        // เอฟเฟกต์วิ้งๆ (Sparkles แบบดาว) ตามจุดที่คลิกบนหน้าจอ
+        /* [แก้ไข] อัปเดตการทำงานของ Sparkle ให้ดึงค่าสีและสร้าง Element ได้แม่นยำขึ้น */
         document.addEventListener('click', function(e) {
-            for (let i = 0; i < 6; i++) {
+            for (let i = 0; i < 5; i++) {
                 const sparkle = document.createElement('div');
                 sparkle.classList.add('sparkle');
+                sparkle.style.left = (e.pageX - 7) + 'px';
+                sparkle.style.top = (e.pageY - 7) + 'px';
                 
-                // กำหนดตำแหน่ง
-                sparkle.style.left = (e.pageX - 5) + 'px';
-                sparkle.style.top = (e.pageY - 5) + 'px';
-                
-                // สุ่มทิศทางและสีของวิ้งๆ
                 const mx = (Math.random() - 0.5) * 120 + 'px';
                 const my = (Math.random() - 0.5) * 120 + 'px';
                 sparkle.style.setProperty('--mx', mx);
                 sparkle.style.setProperty('--my', my);
                 
-                // สุ่มสีให้มีเทาเข้มปนกับขาวเพื่อให้เข้าธีม
                 const colors = ['#ffffff', '#cccccc', '#555555'];
-                sparkle.style.background = colors[Math.floor(Math.random() * colors.length)];
+                sparkle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
                 
                 document.body.appendChild(sparkle);
-                
-                sparkle.addEventListener('animationend', function() {
-                    sparkle.remove();
-                });
+                sparkle.addEventListener('animationend', function() { sparkle.remove(); });
             }
         });
     </script>
