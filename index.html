@@ -36,15 +36,15 @@
 
         .main-container::before, .main-container::after {
             content: ''; position: absolute; top: -25px; width: 75px; height: 75px;
-            background-color: #333333; border-radius: 50%; z-index: -1;
-            background-image: radial-gradient(circle at center, #f5f5f5 35%, #333333 40%);
+            background-color: #ff99bb; border-radius: 50%; z-index: -1;
+            background-image: radial-gradient(circle at center, #f5f5f5 35%, #ff99bb 40%);
         }
         .main-container::before { left: 35px; transform: rotate(-15deg); }
         .main-container::after { right: 35px; transform: rotate(15deg); }
 
         .paw {
             position: absolute; bottom: -20px; width: 50px; height: 35px;
-            background-color: #333333; border-radius: 50px 50px 30px 30px; z-index: 11;
+            background-color: #ff99bb; border-radius: 50px 50px 30px 30px; z-index: 11;
         }
         .paw::before, .paw::after, .paw-center { content: ''; position: absolute; background-color: #ffffff; border-radius: 50%; }
         .paw::before { width: 12px; height: 14px; top: -5px; left: 6px; transform: rotate(-15deg); }
@@ -59,11 +59,11 @@
         .image-frame {
             position: relative; width: 220px; height: 220px; margin: 0 auto 25px auto;
             border-radius: 20px; overflow: hidden; background: #fff; padding: 6px;
-            box-shadow: 0 0 20px rgba(68, 68, 68, 0.4);
+            box-shadow: 0 0 20px rgba(255, 153, 187, 0.4);
         }
         .image-frame::before {
             content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
-            background: conic-gradient(transparent, transparent, transparent, #444444);
+            background: conic-gradient(transparent, transparent, transparent, #ff99bb);
             animation: rotateNeon 3s linear infinite;
         }
         @keyframes rotateNeon { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
@@ -75,77 +75,67 @@
         /* --- Buttons --- */
         .btn {
             display: block; width: 100%; background-color: #ffffff; color: #333333;
-            border: 2px dashed #cccccc; padding: 14px; margin-bottom: 12px;
+            border: 2px dashed #ff99bb; padding: 14px; margin-bottom: 12px;
             border-radius: 20px; font-size: 18px; text-decoration: none;
             cursor: pointer; transition: all 0.3s ease; position: relative; overflow: hidden;
         }
-        .btn:hover { background-color: #f9f9f9; transform: translateY(-2px); }
-        .btn.selected { border: 2px solid #333333; background-color: #333333; box-shadow: 0 0 15px rgba(51, 51, 51, 0.4); color: #ffffff; font-weight: bold; }
-        .btn-next { background-color: #333333; color: #ffffff; margin-top: 25px; border: 2px solid #333333; font-size: 20px; }
-        .btn-next:hover { background-color: #444444; box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
+        .btn:hover { background-color: #fff5f7; transform: translateY(-2px); }
+        .btn.selected { border: 2px solid #ff99bb; background-color: #ff99bb; box-shadow: 0 0 15px rgba(255, 153, 187, 0.4); color: #ffffff; font-weight: bold; }
+        .btn-next { background-color: #ff99bb; color: #ffffff; margin-top: 25px; border: 2px solid #ff99bb; font-size: 20px; }
+        .btn-next:hover { background-color: #ff7799; box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
 
         /* --- Loading Screen --- */
         .loading-bg { background-color: #ffffff; z-index: 100; }
-        .loader { width: 50px; height: 50px; border: 6px solid #f3f3f3; border-top: 6px solid #333333; border-radius: 50%; animation: spin 1s linear infinite; margin-bottom: 20px; }
+        .loader { width: 50px; height: 50px; border: 6px solid #f3f3f3; border-top: 6px solid #ff99bb; border-radius: 50%; animation: spin 1s linear infinite; margin-bottom: 20px; }
         .loading-text { font-size: 24px; font-weight: bold; color: #333; animation: pulse 1s infinite alternate; }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
         @keyframes pulse { 0% { opacity: 0.5; } 100% { opacity: 1; } }
+
+        /* --- Strawberry Custom Loading Progress Bar --- */
+        .progress-container { width: 80%; max-width: 300px; background: #ffe6ec; border: 3px solid #ff99bb; height: 35px; border-radius: 25px; padding: 3px; position: relative; display: flex; align-items: center; margin-bottom: 20px; }
+        .progress-bar { width: 0%; height: 100%; background: #ff6699; border-radius: 20px; transition: width 0.1s linear; }
+        .progress-strawberry { position: absolute; font-size: 26px; top: -5px; left: 0%; transform: translateX(-50%); transition: left 0.1s linear; }
+        .progress-num { font-size: 22px; font-weight: bold; color: #ff6699; margin-top: 10px; }
 
         /* --- Floating Menu (หน้าเลือกปุ่ม) --- */
         .menu-title { font-size: 28px; margin-bottom: 40px; color: #333; text-shadow: 2px 2px 0 #fff; }
         .floating-btn {
             background: #ffffff; color: #333; font-size: 22px; font-weight: bold;
             padding: 20px 40px; margin: 15px; border-radius: 30px;
-            border: 3px solid #333; cursor: pointer;
-            box-shadow: 0 10px 0 #333, 0 15px 20px rgba(0,0,0,0.2);
+            border: 3px solid #ff99bb; cursor: pointer;
+            box-shadow: 0 10px 0 #ff99bb, 0 15px 20px rgba(0,0,0,0.1);
             transition: all 0.2s; position: relative;
             animation: floatUpDown 3s ease-in-out infinite alternate;
         }
         .floating-btn:nth-child(2) { animation-delay: 1s; }
-        .floating-btn:active { transform: translateY(10px); box-shadow: 0 0 0 #333; }
+        .floating-btn:active { transform: translateY(10px); box-shadow: 0 0 0 #ff99bb; }
         @keyframes floatUpDown { 0% { transform: translateY(0); } 100% { transform: translateY(-15px); } }
 
         /* --- Scrollable Reading Page --- */
         .reading-box {
             background: #fff; width: 90%; max-width: 400px;
-            border-radius: 20px; border: 4px solid #333; padding: 20px; position: relative; box-shadow: 0 0 20px rgba(255,255,255,0.8);
+            border-radius: 20px; border: 4px solid #ff99bb; padding: 20px; position: relative; box-shadow: 0 0 20px rgba(255,255,255,0.8);
         }
-        .reading-box::before { content: '🐼'; position: absolute; top: -30px; left: 50%; transform: translateX(-50%); font-size: 45px; background: #fff; border-radius: 50%; padding: 0 10px; border: 4px solid #333; }
+        .reading-box::before { content: '🐼'; position: absolute; top: -30px; left: 50%; transform: translateX(-50%); font-size: 45px; background: #fff; border-radius: 50%; padding: 0 10px; border: 4px solid #ff99bb; }
         .reading-title { font-size: 24px; text-align: center; margin-top: 15px; margin-bottom: 15px; border-bottom: 2px dashed #ccc; padding-bottom: 10px;}
         .scroll-content { max-height: 250px; overflow-y: auto; font-size: 20px; line-height: 1.6; text-align: left; padding-right: 10px; color: #444; }
         .scroll-content::-webkit-scrollbar { width: 8px; }
         .scroll-content::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 10px; }
-        .scroll-content::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
+        .scroll-content::-webkit-scrollbar-thumb { background: #ff99bb; border-radius: 10px; }
         
-        .btn-back { margin-top: 20px; background: #eee; color: #333; }
-        .btn-finish { background: #333; color: #fff; margin-top: 10px; border: none; }
+        .btn-back { margin-top: 20px; background: #eee; color: #333; border: 2px dashed #ccc; }
+        .btn-finish { background: #ff99bb; color: #fff; margin-top: 10px; border: none; }
+        .btn-finish:hover { background: #ff7799; }
 
         /* =========================================
-           DISCO BACKGROUND (ผับดิสโก้แสงสี)
+           หน้าเลือกสไตล์แพนด้าชมพู (ตารางชมพูนมอ่อน พื้นขาว)
            ========================================= */
         #page-dance {
-            background: linear-gradient(45deg, #ff007f, #7f00ff, #00ffff, #00ff00, #ffff00, #ff0000);
-            background-size: 400% 400%;
-            animation: discoColors 2s infinite, strobeEffect 0.4s infinite alternate;
+            background-color: #ffffff;
+            background-image: linear-gradient(#ffebf0 2px, transparent 2px), linear-gradient(90deg, #ffebf0 2px, transparent 2px);
+            background-size: 40px 40px;
             position: relative;
             z-index: 1;
-        }
-
-        #page-dance::before {
-            content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
-            background: conic-gradient(transparent, rgba(255,255,255,0.4), transparent, rgba(255,255,255,0.4), transparent);
-            animation: rotateNeon 4s linear infinite; z-index: -1; pointer-events: none;
-        }
-
-        @keyframes discoColors {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        @keyframes strobeEffect {
-            0% { filter: brightness(1) contrast(1.2); }
-            100% { filter: brightness(1.5) contrast(1.5); }
         }
 
         /* =========================================
@@ -157,39 +147,35 @@
             transform-origin: bottom center;
         }
         
-        /* หัว */
-        .p-head { position: absolute; width: 120px; height: 95px; background: #fff; border: 5px solid #333; border-radius: 50% 50% 45% 45%; top: 15px; left: 10px; z-index: 3; }
-        .p-ear { position: absolute; width: 40px; height: 35px; background: #333; border-radius: 50%; top: 5px; z-index: 1; }
+        .p-head { position: absolute; width: 120px; height: 95px; background: #fff; border: 5px solid #ff6699; border-radius: 50% 50% 45% 45%; top: 15px; left: 10px; z-index: 3; }
+        .p-ear { position: absolute; width: 40px; height: 35px; background: #ff6699; border-radius: 50%; top: 5px; z-index: 1; }
         .p-ear.left { left: 5px; transform: rotate(-20deg); } .p-ear.right { right: 5px; transform: rotate(20deg); }
-        .p-eye { position: absolute; width: 28px; height: 38px; background: #333; border-radius: 50%; top: 35px; }
+        .p-eye { position: absolute; width: 28px; height: 38px; background: #ff6699; border-radius: 50%; top: 35px; }
         .p-eye.left { left: 20px; transform: rotate(-15deg); } .p-eye.right { right: 20px; transform: rotate(15deg); }
         .p-pupil { position: absolute; width: 10px; height: 10px; background: #fff; border-radius: 50%; top: 6px; right: 6px; }
-        .p-nose { position: absolute; width: 16px; height: 10px; background: #333; border-radius: 50%; top: 68px; left: 47px; }
-        .p-blush { position: absolute; width: 18px; height: 10px; background: #ff99cc; border-radius: 50%; top: 60px; opacity: 0.8; }
+        .p-nose { position: absolute; width: 16px; height: 10px; background: #ff6699; border-radius: 50%; top: 68px; left: 47px; }
+        .p-blush { position: absolute; width: 18px; height: 10px; background: #ffb3cc; border-radius: 50%; top: 60px; opacity: 0.8; }
         .p-blush.left { left: 8px; } .p-blush.right { right: 8px; }
         
-        /* ลำตัว */
-        .p-body { position: absolute; width: 85px; height: 75px; background: #fff; border: 5px solid #333; border-radius: 40% 40% 45% 45%; top: 95px; left: 27px; z-index: 2; }
+        .p-body { position: absolute; width: 85px; height: 75px; background: #fff; border: 5px solid #ff6699; border-radius: 40% 40% 45% 45%; top: 95px; left: 27px; z-index: 2; }
         
-        /* ขา */
-        .p-leg { position: absolute; width: 30px; height: 35px; background: #333; border-radius: 10px 10px 20px 20px; top: 150px; z-index: 1; }
+        .p-leg { position: absolute; width: 30px; height: 35px; background: #ff6699; border-radius: 10px 10px 20px 20px; top: 150px; z-index: 1; }
         .p-leg.left { left: 35px; } .p-leg.right { right: 35px; }
 
-        /* มือ */
-        .p-arm { position: absolute; width: 30px; height: 45px; background: #333; border: 5px solid #333; top: 100px; z-index: 1; }
+        .p-arm { position: absolute; width: 30px; height: 45px; background: #ff6699; border: 5px solid #ff6699; top: 100px; z-index: 1; }
         .p-arm.left { left: 8px; border-radius: 20px 0 0 20px; transform: rotate(-35deg); }
         .p-arm.right { right: 8px; border-radius: 0 20px 20px 0; transform: rotate(35deg); }
         
-        .p-hand { position: absolute; width: 18px; height: 18px; background: #333; border-radius: 50%; top: 122px; z-index: 4; }
+        .p-hand { position: absolute; width: 18px; height: 18px; background: #ff6699; border-radius: 50%; top: 122px; z-index: 4; }
         .p-hand.left { left: 23px; }
         .p-hand.right { right: 23px; }
 
         .chibi-msg {
             font-size: 26px; margin-top: 40px; font-weight: bold;
             background: rgba(255, 255, 255, 0.95); padding: 12px 28px;
-            border-radius: 20px; border: 3px dashed #333;
+            border-radius: 20px; border: 3px dashed #ff6699;
             box-shadow: 0 0 25px rgba(255, 255, 255, 1);
-            position: relative; z-index: 20; color: #000;
+            position: relative; z-index: 20; color: #ff6699;
             display: inline-block;
         }
 
@@ -204,71 +190,87 @@
 
         .sparkle { 
             position: absolute; width: 15px; height: 15px; pointer-events: none; 
-            animation: flyOut 0.6s ease-out forwards; z-index: 9999; background-color: #ffffff;
+            animation: flyOut 0.6s ease-out forwards; z-index: 9999; background-color: #ff99bb;
             clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
         }
         @keyframes flyOut { 0% { transform: translate(0, 0) scale(1) rotate(0deg); opacity: 1; } 100% { transform: translate(var(--mx), var(--my)) scale(0) rotate(180deg); opacity: 0; } }
 
         /* =========================================
-           ระบบปุ่มบังคับเลือก 
+           ระบบปุ่มเลือก ดาโน หรือ โนดา 
            ========================================= */
         .choice-container {
             display: none; flex-direction: column; align-items: center; justify-content: center; width: 100%; height: 100vh; position: relative;
         }
-        .choice-title { font-size: 32px; color: #fff; font-weight: bold; margin-bottom: 30px; text-shadow: 2px 2px 4px rgba(0,0,0,0.6); text-align: center; z-index: 10; }
+        .choice-title { font-size: 36px; color: #ff6699; font-weight: bold; margin-bottom: 30px; text-shadow: 2px 2px 0px #fff; text-align: center; z-index: 10; }
         
         .force-btn {
             padding: 15px 45px; font-size: 26px; font-weight: bold; border-radius: 50px;
-            border: 4px solid #333; cursor: pointer; background: white; color: #333;
-            box-shadow: 0 8px 0 #333, 0 15px 20px rgba(0,0,0,0.3); transition: all 0.2s;
+            border: 4px solid #ff6699; cursor: pointer; background: white; color: #ff6699;
+            box-shadow: 0 8px 0 #ff6699, 0 15px 20px rgba(0,0,0,0.1); transition: all 0.2s, font-size 0.3s ease, padding 0.3s ease;
             margin: 15px; z-index: 10; min-width: 180px; text-align: center;
         }
-        .force-btn:active { transform: translateY(8px); box-shadow: 0 0 0 #333; }
-        #btn-noda { position: relative; transition: left 0.2s ease, top 0.2s ease; }
+        .force-btn:active { transform: translateY(8px); box-shadow: 0 0 0 #ff6699; }
+        #btn-dano.huge-btn { font-size: 45px; padding: 25px 75px; min-width: 280px; background: #ffe6ec; animation: pulseGlow 1.5s infinite alternate; }
+        @keyframes pulseGlow { 0% { box-shadow: 0 8px 0 #ff6699, 0 0 10px rgba(255,102,153,0.5); } 100% { box-shadow: 0 8px 0 #ff6699, 0 0 25px rgba(255,102,153,0.9); } }
 
         /* =========================================
-           หน้าแผ่นเสียง พื้นหลังพลุขยับได้ (สีเดิมธรรมชาติ ไม่ย้อมชมพู) 🎆
+           ✨ POPUP MODAL (กรอบนอกชมพู กรอบในขาว ตัวหนังสือชมพูนม)
+           ========================================= */
+        .popup-overlay {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.3); justify-content: center; align-items: center;
+            z-index: 99999; animation: fadeInPopup 0.3s ease;
+        }
+        .popup-outer-border {
+            background: #ff6699; padding: 3px; border-radius: 24px;
+            box-shadow: 0 10px 30px rgba(255, 102, 153, 0.4);
+            width: 85%; max-width: 360px; position: relative;
+        }
+        .popup-content {
+            background: #ffffff; border-radius: 21px; padding: 40px 20px 30px 20px;
+            text-align: center; font-size: 26px; font-weight: bold; color: #ffb3cc;
+        }
+        .popup-close-btn {
+            position: absolute; top: 12px; right: 15px; font-size: 24px; cursor: pointer;
+            color: #ff6699; transition: transform 0.2s; background: none; border: none; font-weight: bold;
+        }
+        .popup-close-btn:hover { transform: scale(1.1); }
+        @keyframes fadeInPopup { from { opacity: 0; } to { opacity: 1; } }
+
+        /* =========================================
+           หน้าเล่นเพลงและรูปภาพตามสั่ง 🌊💖
            ========================================= */
         #page-music-player {
             width: 100%; height: 100vh; overflow: hidden; position: relative;
-            background-color: #000; /* พื้นหลังสำรองสีดำเพื่อให้พลุสีสดเด่นชัด */
+            background-color: #000;
         }
         
-        /* เลเยอร์พลุ GIF สีเดิมธรรมชาติ ไม่โดนฟิลเตอร์สีชมพูบังบัง */
         .fireworks-bg {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background-image: url('https://i.ibb.co/5DXw9C0/179-A8-FBC-E210-4-B32-A6-C0-E4504-DA577-B6.gif');
+            background-image: url('https://i.ibb.co/tMgxSwn6/97940-B00-CD73-4515-9-F58-7363981-D2-C16.gif');
             background-size: cover; background-position: center; z-index: 1; opacity: 1;
         }
 
-        /* กรอบแนวนอนยาวๆ ครอบแผ่นเสียง เพิ่มกรอบสีขาวและเงาเด่นๆ */
         .horizontal-frame-container {
             position: relative; width: 90%; max-width: 440px; height: 260px;
-            background-image: url('https://i.ibb.co/QjpTR64j/IMG-1785.jpg'); /* รูปที่ 1 */
-            background-size: 100% 100%; background-repeat: no-repeat;
+            background-image: url('https://i.ibb.co/cPLS3qH/IMG-1795.jpg');
+            background-size: cover; background-position: center; background-repeat: no-repeat;
             display: flex; justify-content: center; align-items: center;
             z-index: 5; margin-bottom: 20px;
-            border: 6px solid #ffffff; /* กรอบสีขาว */
-            box-shadow: 0 0 25px rgba(255, 255, 255, 0.7), 0 15px 35px rgba(0,0,0,0.5); /* เงากรอบสีขาวรอบๆ */
+            border: 6px solid #ffffff; 
+            box-shadow: 0 0 25px rgba(255, 255, 255, 0.7), 0 15px 35px rgba(0,0,0,0.5); 
             border-radius: 20px;
         }
         
-        /* ตัวแผ่นเสียงที่อยู่ข้างในกรอบแนวนอน */
         .vinyl-record {
             width: 170px; height: 170px; 
-            background: repeating-radial-gradient(
-                #333333, 
-                #333333 6px, 
-                #222222 7px, 
-                #111111 12px
-            );
+            background: repeating-radial-gradient(#333333, #333333 6px, #222222 7px, #111111 12px);
             border-radius: 50%; border: 4px solid rgba(255, 255, 255, 0.9); 
             box-shadow: 0 0 15px rgba(0,0,0,0.3);
             display: flex; justify-content: center; align-items: center;
             animation: spinRecord 4s linear infinite;
         }
         
-        /* แกนกลางใส่รูป (รูปที่ 2) */
         .vinyl-center { 
             width: 75px; height: 75px; background: #fff; border-radius: 50%; 
             border: 2px solid #fff; display: flex; justify-content: center; align-items: center; 
@@ -276,16 +278,10 @@
             box-shadow: 0 0 8px rgba(0,0,0,0.2);
         }
         .vinyl-center img { width: 100%; height: 100%; object-fit: cover; }
-        
-        /* รูตรงกลางแผ่นเสียง */
-        .vinyl-hole {
-            position: absolute; width: 10px; height: 10px; background: #ffffff; 
-            border-radius: 50%; border: 1px solid rgba(0,0,0,0.2);
-        }
+        .vinyl-hole { position: absolute; width: 10px; height: 10px; background: #ffffff; border-radius: 50%; border: 1px solid rgba(0,0,0,0.2); }
         
         @keyframes spinRecord { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
-        /* ข้อความพินอินใต้แผ่นเสียง แสงนีออนแวววับอยู่คงที่ */
         .neon-pinyin-text {
             font-size: 38px; font-weight: bold; color: #fff; text-align: center;
             z-index: 5; margin-bottom: 25px; letter-spacing: 2px;
@@ -297,21 +293,18 @@
             to { text-shadow: 0 0 4px #fff, 0 0 7px #ff3399, 0 0 14px #ff3399, 0 0 25px #ff3399; }
         }
 
-        /* ข้อความที่ลอยบนหน้าจอ */
         .floating-text {
             position: absolute; font-weight: bold; pointer-events: none;
             text-shadow: 2px 2px 0px #fff, -2px -2px 0px #fff, 2px -2px 0px #fff, -2px 2px 0px #fff, 0 5px 15px rgba(255,105,180,0.4);
             animation: fallAndFade linear forwards; z-index: 6; white-space: nowrap;
         }
         
-        /* หัวใจเล็กๆ ลอยขึ้น */
         .floating-heart {
             position: absolute; pointer-events: none; z-index: 6; font-size: 20px;
             animation: floatUp 5s linear forwards;
             filter: drop-shadow(0 0 5px rgba(255,255,255,0.8));
         }
 
-        /* ตัวการ์ตูนตกแต่งด้านข้าง */
         .cute-char {
             position: absolute; font-size: 55px; z-index: 7;
             animation: bobbing 2s infinite alternate ease-in-out;
@@ -358,7 +351,7 @@
             </div>
 
             <button class="btn" id="btn-switch" onclick="switchImage(this)">🔄 สลับรูปภาพ</button>
-            <hr style="border: 0; height: 2px; background: #eee; margin: 25px 0; border-radius: 2px;">
+            <hr style="border: 0; height: 2px; background: #ffe6ec; margin: 25px 0; border-radius: 2px;">
 
             <a href="https://www.instagram.com/sdxzwcz.x?igsh=amJlN3k4d3l6OGhx&utm_source=qr" target="_blank" class="btn plat-btn" onclick="selectBtn(this)">📸 Instagram</a>
             <a href="https://www.threads.com/@zczexx.o0?igshid=NTc4MTIwNjQ2YQ==" target="_blank" class="btn plat-btn" onclick="selectBtn(this)">🧵 Threads 1</a>
@@ -374,6 +367,15 @@
     <div id="page-loading" class="page-section loading-bg">
         <div class="loader"></div>
         <div class="loading-text">กำลังดาวน์โหลดแป๊บนึง...</div>
+    </div>
+
+    <div id="page-strawberry-loading" class="page-section" style="background: #ffffff; z-index: 9999;">
+        <div class="progress-container">
+            <div class="progress-bar" id="str-bar"></div>
+            <div class="progress-strawberry" id="str-berry">🍓</div>
+        </div>
+        <div class="progress-num" id="str-num">0%</div>
+        <div class="loading-text" style="color: #ff6699; margin-top: 15px;">กำลังเปิดเครื่องเล่นเพลงรัก...</div>
     </div>
 
     <div id="page-menu" class="page-section">
@@ -393,8 +395,8 @@
     </div>
 
     <div id="page-loading-white" class="page-section" style="background: white; z-index: 999;">
-        <div class="loader"></div>
-        <div class="loading-text">กำลังเตรียมตัวเต้น...</div>
+        <div class="loader" style="border-top: 6px solid #ff99bb;"></div>
+        <div class="loading-text" style="color: #ff6699;">กำลังเตรียมความพร้อม...</div>
     </div>
 
     <div id="page-dance" class="page-section">
@@ -422,41 +424,46 @@
                 <div class="p-leg right"></div>
             </div>
             <div>
-                <div class="chibi-msg">ไงล่ะ ดาโนดิว่ะ! 😎</div>
+                <div class="chibi-msg">มีอะไรจะให้เลือกแหละ! 🐼💕</div>
             </div>
         </div>
 
         <div class="choice-container" id="choice-box">
-            <div class="choice-title">เลือกมาเดี๋ยวนี้! 🤫</div>
-            <div style="display: flex; justify-content: center; align-items: center; width: 100%; min-height: 150px; position: relative;">
+            <div class="choice-title">“ ดาโน หรือ โนดา ”</div>
+            <div style="display: flex; justify-content: center; align-items: center; flex-direction: column; width: 100%; min-height: 200px; position: relative;">
                 <button class="force-btn" id="btn-dano" onclick="selectDano()">ดาโน</button>
                 <button class="force-btn" id="btn-noda" onclick="clickNoda()">โนดา</button>
             </div>
         </div>
     </div>
 
+    <div id="noda-popup" class="popup-overlay">
+        <div class="popup-outer-border">
+            <button class="popup-close-btn" onclick="closePopup()">❌</button>
+            <div class="popup-content">
+                แน่ใจแล้วหรอ? เลือกใหม่!
+            </div>
+        </div>
+    </div>
+
     <div id="page-music-player" class="page-section">
-        
         <div class="fireworks-bg"></div>
-        
         <div class="cute-char char-left">🐰🌷</div>
         <div class="cute-char char-right">🧸🎀</div>
 
         <div class="horizontal-frame-container">
             <div class="vinyl-record">
                 <div class="vinyl-center">
-                    <img src="https://i.ibb.co/0pz8h0LK/IMG-1787.jpg" alt="IMG-1787">
-                    <div class="vinyl-hole"></div>
+                    <img src="https://i.ibb.co/CsJsrCYg/IMG-1793.jpg" alt="IMG-1793"> <div class="vinyl-hole"></div>
                 </div>
             </div>
         </div>
 
         <div class="neon-pinyin-text">“ Wǒ ài nǐ ”</div>
-        
         <h1 style="color: #ffffff; font-size: 34px; z-index: 5; text-shadow: 0 0 10px #ff3399, 0 0 20px rgba(255,255,255,0.8);">Now Playing... 🎵</h1>
     </div>
 
-    <audio id="myAudio" src="https://average-black-ornamueg.edgeone.dev/v14044g50000d3h11c7og65in45sue5g.mp3"></audio>
+    <audio id="myAudio" src="https://rural-black-xyaiq8ih.edgeone.dev/v14044g50000d3h11c7og65in45sue5g.mp3"></audio>
 
     <script>
         const texts = {
@@ -470,7 +477,6 @@
             }
         };
 
-        let nodaClickCount = 0;
         let textInterval;
         let heartInterval;
 
@@ -529,27 +535,45 @@
                 setTimeout(() => {
                     document.getElementById('panda-dance-box').style.display = 'none';
                     document.getElementById('choice-box').style.display = 'flex';
-                }, 3000);
+                }, 2000);
 
             }, 1000);
         }
 
+        // ระบบปุ่มโนดารอบใหม่ เด้งป๊อบอัพ เพลงไม่เล่น
         function clickNoda() {
-            nodaClickCount++;
-            const btnNoda = document.getElementById('btn-noda');
-            
-            if (nodaClickCount === 1) {
-                btnNoda.style.position = 'absolute';
-                const randomX = Math.floor(Math.random() * 70) + 15; 
-                const randomY = Math.floor(Math.random() * 70) + 15; 
-                btnNoda.style.left = randomX + 'vw';
-                btnNoda.style.top = randomY + 'vh';
-            } else if (nodaClickCount >= 2) {
-                btnNoda.style.display = 'none';
-            }
+            document.getElementById('noda-popup').style.display = 'flex';
         }
 
+        function closePopup() {
+            document.getElementById('noda-popup').style.display = 'none';
+        }
+
+        // เมื่อกด ดาโน จะไปหน้าหลอดสตรอว์เบอร์รี่
         function selectDano() {
+            goToPage('page-strawberry-loading');
+            
+            let progress = 0;
+            const bar = document.getElementById('str-bar');
+            const berry = document.getElementById('str-berry');
+            const num = document.getElementById('str-num');
+            
+            const loadingInterval = setInterval(() => {
+                progress += 5;
+                bar.style.width = progress + '%';
+                berry.style.left = progress + '%';
+                num.innerText = progress + '%';
+                
+                if (progress >= 100) {
+                    clearInterval(loadingInterval);
+                    setTimeout(() => {
+                        playMusicFinal();
+                    }, 400);
+                }
+            }, 100);
+        }
+
+        function playMusicFinal() {
             goToPage('page-music-player');
             const audio = document.getElementById('myAudio');
             audio.play();
@@ -585,7 +609,6 @@
             textElem.style.color = colors[Math.floor(Math.random() * colors.length)];
 
             document.getElementById('page-music-player').appendChild(textElem);
-
             textElem.addEventListener('animationend', function() { textElem.remove(); });
         }
 
@@ -606,11 +629,13 @@
             heartElem.style.animationDuration = duration + 's';
 
             document.getElementById('page-music-player').appendChild(heartElem);
-
             heartElem.addEventListener('animationend', function() { heartElem.remove(); });
         }
 
         document.addEventListener('click', function(e) {
+            // ป้องกันเอฟเฟกต์ประกายไฟซ้อนกันเมื่อกดปิดป๊อบอัพ
+            if (e.target.classList.contains('popup-close-btn') || e.target.closest('.popup-outer-border')) return;
+
             for (let i = 0; i < 5; i++) {
                 const sparkle = document.createElement('div');
                 sparkle.classList.add('sparkle');
@@ -622,7 +647,7 @@
                 sparkle.style.setProperty('--mx', mx);
                 sparkle.style.setProperty('--my', my);
                 
-                const colors = ['#ffffff', '#cccccc', '#555555'];
+                const colors = ['#ffffff', '#ffccd5', '#ff99bb'];
                 sparkle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
                 
                 document.body.appendChild(sparkle);
